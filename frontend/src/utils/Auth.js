@@ -34,10 +34,8 @@ export const register = (email, password) => {
 // Вызываем функцию register
 register('example@example.com', 'password123')
   .then(responseData => {
-    // Здесь можете продолжить обработку данных, если необходимо
   })
   .catch(error => {
-    // Здесь можете обработать ошибку и предпринять необходимые действия
   });
 
 
@@ -67,10 +65,10 @@ export const login = (email, password) => {
 // Вызываем функцию login
 login('example@example.com', 'password123')
   .then(responseData => {
-    // Здесь можете продолжить обработку данных, если необходимо
+    
   })
   .catch(error => {
-    // Здесь можете обработать ошибку и предпринять необходимые действия
+
   });
 
 
