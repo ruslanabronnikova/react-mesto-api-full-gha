@@ -17,27 +17,8 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then(response => {
-      console.log('Статус ответа:', response.status);
-      return response.json();
-    })
-    .then(responseData => {
-      console.log('Ответ от сервера:', responseData);
-      return responseData;
-    })
-    .catch(error => {
-      console.error('Ошибка при регистрации:', error);
-      throw error;
-    });
+    .then(handleResponse);
 };
-
-// Вызываем функцию register
-register('example@example.com', 'password123')
-  .then(responseData => {
-  })
-  .catch(error => {
-  });
-
 
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -48,29 +29,8 @@ export const login = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then(response => {
-      console.log('Статус ответа:', response.status);
-      return response.json();
-    })
-    .then(responseData => {
-      console.log('Ответ от сервера:', responseData);
-      return responseData;
-    })
-    .catch(error => {
-      console.error('Ошибка при входе:', error);
-      throw error;
-    });
+    .then(handleResponse)
 };
-
-// Вызываем функцию login
-login('example@example.com', 'password123')
-  .then(responseData => {
-    
-  })
-  .catch(error => {
-
-  });
-
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {

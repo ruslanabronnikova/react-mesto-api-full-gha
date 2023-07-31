@@ -25,7 +25,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login'
 import Register from './Register';
 
-
 function App() {
   const navigate = useNavigate();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -46,18 +45,20 @@ function App() {
 
   const [infoPopupCheck, setInfoPopupCheck] = useState(false)
 
-
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getInfoUsers()])
       .then(([initialCards, userData]) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.user);
         setCards(initialCards);
+        setEmail(userData.user.email)
+
+        console.log(initialCards)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
   }, [])
-
+  
   function handleCardClick(card) {
     setSelectedCard(card)
   }
@@ -84,8 +85,8 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
+    const isLiked = card.likes.some(user => user._id === currentUser._id);
+    debugger
     api.changeLikeCard(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
@@ -95,7 +96,6 @@ function App() {
   }
 
   function handleCardDeleteCard(card) {
-
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
     })
@@ -153,24 +153,23 @@ function App() {
   function handleLog({ email, password }) {
     auth.login(email, password)
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
+        debugger
+        if (data.JWT) {
+          localStorage.setItem('JWT', data.JWT);
           setIsLoggedIn(true);
           setEmail(email);
-          console.log(email, password, data.token)
           navigate("/main");
         }
+        console.log(data);
       })
       .catch(() => {
         setInfoPopupCheck(false)
         setInfoPopupCheckOpen(true)
       });
-
-      console.log(email, password)
-  };
+  }
 
   function checkToken() {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('JWT');
     if (token) {
       auth.getContent(token)
         .then((res) => {

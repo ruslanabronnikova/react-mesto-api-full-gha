@@ -60,7 +60,6 @@ class Api {
   }
 
   changeLikeCard(cardId, isLiked) {
-    // console.log(this._headers, cardId)
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers,
@@ -84,7 +83,7 @@ const api = new Api({
   // url: 'https://nomoreparties.co/v1/cohort-64/',
   url: 'http://localhost:3000',
   headers: {
-    authorization: '',
+    authorization: `Bearer ${localStorage.getItem('JWT')}`,
     'Content-Type': 'application/json',
   }
 })
