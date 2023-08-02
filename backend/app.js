@@ -9,7 +9,6 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
@@ -27,6 +26,7 @@ mongoose.connect(DB_MONGO);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+const cors = require('cors');
 app.use(cors());
 
 app.get('/crash-test', () => {
