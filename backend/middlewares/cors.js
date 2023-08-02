@@ -2,7 +2,7 @@
 const allowedCors = [
   'https://bronnikovarsmesto.nomoreparties.co',
   'http://api.bronnokovarsmesto.nomoreparties.co',
-  'localhost:3000'
+  'localhost:3000',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
@@ -24,7 +24,7 @@ const СorsMiddleware = (req, res, next) => {
     return res.status(200).send();
   }
 
-  next();
+  return next();
 };
 
 module.exports = { СorsMiddleware };
