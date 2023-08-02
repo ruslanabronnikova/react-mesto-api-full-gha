@@ -26,8 +26,6 @@ mongoose.connect(DB_MONGO);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-const cors = require('cors');
-app.use(cors());
 
 app.get('/crash-test', () => {
   setTimeout(() => {

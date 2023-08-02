@@ -1,7 +1,7 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'https://bronnikovarsmesto.nomoreparties.co',
-  'http://api.bronnokovarsmesto.nomoreparties.co',
+  'https://api.bronnokovarsmesto.nomoreparties.co',
   'localhost:3000',
 ];
 
