@@ -1,4 +1,3 @@
-const { NODE_ENV } = process.env;
-const { JWT_SECRET } = process.env;
+const JWT_SECRET = 'tokensecretuserregistration';
 
-module.exports = { JWT_SECRET, NODE_ENV };
+module.exports = { JWT_SECRET };
