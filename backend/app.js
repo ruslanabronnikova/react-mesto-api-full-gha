@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 
@@ -8,6 +9,7 @@ const { DB_MONGO = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
 const mongoose = require('mongoose');
 
 const { errors } = require('celebrate');
@@ -24,6 +26,7 @@ const { СorsMiddleware } = require('./middlewares/cors');
 
 mongoose.connect(DB_MONGO);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
