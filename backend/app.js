@@ -22,7 +22,7 @@ const handleNotFound = require('./routes/errorHandler');
 const authMiddleW = require('./middlewares/authMiddleW');
 const errorMiddleW = require('./middlewares/errorMiddleW');
 const { createUser, loginUser } = require('./controllers/users');
-const { СorsMiddleware } = require('./middlewares/cors');
+// const { СorsMiddleware } = require('./middlewares/cors');
 
 mongoose.connect(DB_MONGO);
 
@@ -36,7 +36,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(СorsMiddleware);
+// app.use(СorsMiddleware);
 
 // Валидация запроса на вход (логин) пользователя
 app.post('/signin', celebrate({
