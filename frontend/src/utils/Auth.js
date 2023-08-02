@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.bronnokovarsmesto.nomoreparties.co';
+export const BASE_URL = 'https://api.bronnokovarsmesto.nomoreparties.co';
 
 export const handleResponse = (res) => {
   if (res.ok) {
