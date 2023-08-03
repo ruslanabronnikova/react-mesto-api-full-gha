@@ -80,8 +80,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.bronnokovarsmesto.nomoreparties.co',
-  // url: 'http://localhost:3000',
+  // url: 'https://api.bronnokovarsmesto.nomoreparties.co',
+  url: 'http://localhost:3000',
   headers: {
     authorization: `Bearer ${localStorage.getItem('JWT')}`,
     'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, NODE_ENV } = require('../constants/jwt');
+const { JWT_SECRET } = require('../constants/jwt');
 
 const UnAuthorized = require('../classErrors/UnAuthorized');
 
@@ -12,7 +12,7 @@ const authMiddleW = (req, res, next) => {
   const token = authorization.replace(bearer, '');
   let payload;
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, JWT_SECRET);
     req.user = payload;
   } catch (err) {
     return next(new UnAuthorized('Неправильные почта или пароль'));
