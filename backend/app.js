@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { CorsMiddleware } = require('./middlewares/cors');
+const cors = require('cors');
 
 const express = require('express');
 
@@ -28,7 +28,10 @@ mongoose.connect(DB_MONGO);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(CorsMiddleware);
+app.use(cors({
+  origin: true,
+  credentials: true,
+}))
 
 app.get('/crash-test', () => {
   setTimeout(() => {
