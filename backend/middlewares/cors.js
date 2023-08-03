@@ -1,30 +1,33 @@
-// // Массив доменов, с которых разрешены кросс-доменные запросы
-// const allowedCors = [
-//   'https://bronnikovarsmesto.nomoreparties.co',
-//   'https://api.bronnokovarsmesto.nomoreparties.co',
-//   'http://localhost:3000',
-//   'https://localhost:3000',
-// ];
+// Массив доменов, с которых разрешены кросс-доменные запросы
+const allowedCors = [
+  'https://bronnikovarsmesto.nomoreparties.co',
+  'https://api.bronnokovarsmesto.nomoreparties.co',
+  'http://bronnikovarsmesto.nomoreparties.co',
+  'http://api.bronnokovarsmesto.nomoreparties.co',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
 
-// const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-// const СorsMiddleware = (req, res, next) => {
-//   const { origin } = req.headers;
-//   const { method } = req;
-//   const requestHeaders = req.headers['access-control-request-headers'];
-//   res.header('Access-Control-Allow-Credentials', true);
+const СorsMiddleware = (req, res, next) => {
+  const { origin } = req.headers;
+  const { method } = req;
+  const requestHeaders = req.headers['access-control-request-headers'];
+  res.header('Access-Control-Allow-Credentials', true);
 
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Origin', "*");
+  }
 
-//   if (method === 'OPTIONS') {
-//     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-//     res.header('Access-Control-Allow-Headers', requestHeaders);
-//     return res.end();
-//   }
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
 
-//   return next();
-// };
+  return next();
+};
 
-// module.exports = { СorsMiddleware };
+module.exports = { СorsMiddleware };
