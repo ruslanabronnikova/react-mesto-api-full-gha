@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
+
+const cors = require('cors')
 
 const bodyParser = require('body-parser');
 
@@ -22,7 +23,6 @@ const handleNotFound = require('./routes/errorHandler');
 const authMiddleW = require('./middlewares/authMiddleW');
 const errorMiddleW = require('./middlewares/errorMiddleW');
 const { createUser, loginUser } = require('./controllers/users');
-// const { СorsMiddleware } = require('./middlewares/cors');
 
 mongoose.connect(DB_MONGO);
 
@@ -35,8 +35,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-// app.use(СorsMiddleware);
 
 // Валидация запроса на вход (логин) пользователя
 app.post('/signin', celebrate({
