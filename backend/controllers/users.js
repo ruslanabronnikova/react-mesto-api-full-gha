@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-const { JWT_SECRET } = require('../constants/jwt');
 
 const BadRequest = require('../classErrors/BadRequest');
 const NotFound = require('../classErrors/NotFound');
 const UnAuthorized = require('../classErrors/UnAuthorized');
 const Conflict = require('../classErrors/Conflict');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const {
@@ -54,7 +55,7 @@ const loginUser = (req, res, next) => {
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) throw new UnAuthorized('Неправильные почта или пароль');
-          const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
           return res.send({ JWT: token });
         });
     })
