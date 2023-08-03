@@ -1,6 +1,5 @@
 require('dotenv').config();
-console.log(process.env.NODE_ENV)
-console.log(process.env.JWT_SECRET)
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -8,10 +7,10 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger')
-const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi } = require('celebrate');
+const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { CorrectUrl } = require('./constants/correctUrl');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
@@ -26,6 +25,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
 app.use(cors());
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 // Валидация запроса на вход (логин) пользователя
 app.post('/signin', celebrate({
